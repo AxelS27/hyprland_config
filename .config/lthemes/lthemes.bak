@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+import json, sys, pathlib
+
+BASE = pathlib.Path("~/.config/lthemes").expanduser()
+CONFIG = BASE / "lthemes-config.json"
+
+CURRENT_CSS = BASE / "current-theme.css"
+CURRENT_CONF = BASE / "current-theme.conf"
+CURRENT_RASI = BASE / "current-theme.rasi"
+
+def die(msg):
+    print(f"[LThemes]{msg}")
+    sys.exit(1)
+
+def load_config():
+    if CONFIG.exists():
+        return json.loads(CONFIG.read_text())
+    return {"current": None}
+
+def save_config(theme):
+    CONFIG.write_text(json.dumps({"current": theme}, indent=2))
+
+def themes():
+    return sorted([
+        d.name for d in BASE.iterdir()
+        if d.is_dir() and (d / "colors.css").exists()
+    ])
+
+def generate_currentTheme(theme):
+    css  = BASE / theme / "colors.css"
+    conf = BASE / theme / "colors.conf"
+    rasi = BASE / theme / "colors.rasi"
+
+    CURRENT_CSS.write_text(
+        f"@import url(\"{css}\");\n"
+    )
+
+    CURRENT_CONF.write_text(
+        f"source = {conf}\n"
+    )
+
+    CURRENT_RASI.write_text(
+        f"@import \"{rasi}\"\n"
+    )
+
+
+def cmd_list():
+    for t in themes():
+        print(t)
+
+def cmd_get():
+    config = load_config()
+    if config["current"]:
+        print(config["current"])
+    else:
+        die("No active theme")
+
+def cmd_set(theme):
+    if theme not in themes():
+        die(f"Theme not found: {theme}")
+
+    save_config(theme)
+    generate_currentTheme(theme)
+
+    print(f"[LThemes]Active theme set to: {theme}")
+
+
+if len(sys.argv) < 2:
+    die("Usage: themes.py [list|get|set]")
+
+cmd = sys.argv[1]
+
+if cmd == "list":
+    cmd_list()
+elif cmd == "get":
+    cmd_get()
+elif cmd == "set":
+    if len(sys.argv) < 3:
+        die("Usage: themes.py set <theme>")
+    cmd_set(sys.argv[2])
+else:
+    die(f"Unknown command: {cmd}")
+

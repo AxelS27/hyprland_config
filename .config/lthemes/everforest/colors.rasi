@@ -1,0 +1,27 @@
+* {
+    bg: #2F383E;
+    bgalt: #374247;
+    bgdark: #22282C;
+    fg: #C1D2A6;
+    fgalt: #B8CC99;
+    white: #FFFFFF;
+    black: #000000;
+    green: #A7C080;
+    darkgreen: #859966;
+    olive: #64734C;
+    yellow: #D9CBA3;
+    darkyellow: #B8A77F;
+    blue: #7DA6C4;
+    darkblue: #5C7D99;
+    cyan: #85A9A1;
+    teal: #6D8B7E;
+    purple: #8B7E9F;
+    magenta: #A78CA9;
+    gray: #879396;
+    lightgray: #B0B8BC;
+    orange: #C08C5E;
+    brown: #8C7A59;
+    red: #C26E6E;
+    darkred: #9F5353;
+    pink: #D99AB3;
+}

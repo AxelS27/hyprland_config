@@ -1,0 +1,18 @@
+{
+  "bg": "#121212",
+  "bgalt": "#38341c",
+  "fg": "#e2c46e",
+
+  "black": "#000000",
+  "red": "#e05f65",
+  "darkred": "#8c2f39",
+  "green": "#7fc8a9",
+  "yellow": "#f1cf8a",
+  "blue": "#7aa2f7",
+  "pink": "#e39ec1",
+  "cyan": "#7dcfff",
+  "gray": "#5c5c5c",
+  "lightgray": "#a0a0a0",
+  "white": "#e8eaed"
+}
+

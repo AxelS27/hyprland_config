@@ -1,0 +1,26 @@
+* {
+    bg: #2E3440;
+    bgalt: #3B4252;
+    bgdark: #434C5E;
+    fg: #ECEFF4;
+    fgalt: #E5E9F0;
+    white: #FFFFFF;
+    black: #000000;
+    blue: #81A1C1;
+    darkblue: #5E81AC;
+    cyan: #88C0D0;
+    teal: #8FBCBB;
+    green: #A3BE8C;
+    darkgreen: #8FBC8F;
+    yellow: #EBCB8B;
+    darkyellow: #D08770;
+    orange: #D08770;
+    brown: #B48EAD;
+    purple: #B48EAD;
+    magenta: #BF616A;
+    red: #BF616A;
+    darkred: #A3BE8C;
+    gray: #4C566A;
+    lightgray: #D8DEE9;
+    pink: #EBCB8B;
+}

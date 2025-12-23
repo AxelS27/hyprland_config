@@ -1,0 +1,53 @@
+@import url("/home/axel/.config/lthemes/current-theme.css");
+
+* {
+	background-image: none;
+	box-shadow: none;
+    font-family: "SF Pro Display";
+    font-size: 20px;
+    font-weight: 700;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.8);
+}
+
+button {
+    border-radius: 13px;
+    color: #e8eaed;
+	background-color: alpha(@bg, .85);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+    margin: 10px;
+}
+
+button:focus, button:active, button:hover {
+	background-color: alpha(@bgalt, .85);
+    background-size: 35%;
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/home/axel/.config/wlogout/images/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/home/axel/.config/wlogout/images/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/home/axel/.config/wlogout/images/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/home/axel/.config/wlogout/images/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/home/axel/.config/wlogout/images/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/home/axel/.config/wlogout/images/reboot.png"));
+}

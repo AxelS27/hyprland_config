@@ -1,0 +1,36 @@
+{
+  "bg": "#1e1e2e",
+  "bgalt": "#313244",
+  "bgdark": "#181825",
+
+  "fg": "#cdd6f4",
+  "fgalt": "#bac2de",
+  "white": "#ffffff",
+  "black": "#11111b",
+
+  "red": "#f38ba8",
+  "darkred": "#e64553",
+  "pink": "#f5c2e7",
+
+  "green": "#a6e3a1",
+  "darkgreen": "#40a02b",
+
+  "yellow": "#f9e2af",
+  "darkyellow": "#df8e1d",
+
+  "blue": "#89b4fa",
+  "darkblue": "#1e66f5",
+
+  "cyan": "#94e2d5",
+  "teal": "#5dd7c1",
+
+  "purple": "#cba6f7",
+  "magenta": "#f5c2e7",
+
+  "gray": "#6c7086",
+  "lightgray": "#a6adc8",
+
+  "orange": "#fab387",
+  "brown": "#b7875f"
+}
+

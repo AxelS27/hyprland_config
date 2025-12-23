@@ -1,0 +1,122 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+    cat <<'EOF'
+[LIEM]Usage: ctd [-t ext1 ext2 ...] [--tree] [DIR]
+       Example: ctd .
+                ctd -t java lua .
+                ctd --tree .
+                ctd -t lua --tree .
+       Run 'ctd -h' for more help.
+EOF
+    exit 1
+fi
+
+DEFAULT_EXTS=("txt" "md" "java" "py" "js" "ts" "lua" "sh" "html" "css" "json" "yaml" "yml" "xml" "sql" "cfg" "conf" "log")
+EXTS=()
+ROOT="."
+SHOW_TREE=0
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            cat <<'EOF'
+[LIEM]Usage: ctd [-t ext1 ext2 ...] [--tree] [DIR]
+       -t, --types   Specify file extensions to include (without dot)
+       -l, --list    List default supported extensions
+       -tr, --tree   Include directory tree + info at top of clipboard
+       DIR           Root directory (default: .)
+EOF
+            exit 0
+            ;;
+        -l|--list)
+            echo "[LIEM]Supported extensions: $(IFS=,; echo "${DEFAULT_EXTS[*]}")"
+            exit 0
+            ;;
+        -t|--types)
+            shift
+            while [[ $# -gt 0 && "$1" != -* ]]; do
+                EXTS+=("$1")
+                shift
+            done
+            ;;
+        --tree|-tr)
+            SHOW_TREE=1
+            shift
+            ;;
+        -*)
+            echo "[LIEM]Error: Unknown option $1" >&2
+            exit 1
+            ;;
+        *)
+            if [[ -d "$1" ]]; then
+                ROOT="$1"
+            else
+                echo "[LIEM]Error: '$1' is not a directory" >&2
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+ABS_ROOT=$(cd "$ROOT" 2>/dev/null && pwd)
+if [[ -z "$ABS_ROOT" ]]; then
+    echo "[LIEM]Error: Cannot resolve absolute path for '$ROOT'" >&2
+    exit 1
+fi
+
+if [[ ${#EXTS[@]} -eq 0 ]]; then
+    EXTS=("${DEFAULT_EXTS[@]}")
+fi
+
+FIND_ARGS=()
+for ext in "${EXTS[@]}"; do
+    if [[ ${#FIND_ARGS[@]} -eq 0 ]]; then
+        FIND_ARGS+=("-name" "*.$ext")
+    else
+        FIND_ARGS+=("-o" "-name" "*.$ext")
+    fi
+done
+
+OUTPUT=""
+
+if [[ $SHOW_TREE -eq 1 ]]; then
+    if ! command -v tree >/dev/null 2>&1; then
+        echo "[LIEM]Error: 'tree' command not found. Install it first (e.g., 'sudo pacman -S tree')." >&2
+        exit 1
+    fi
+
+    TREE_CONTENT=$(tree "$ABS_ROOT" | tail -n +2 | head -n -1)
+    DIR_COUNT=$(cd "$ABS_ROOT" && find . -mindepth 1 -type d | wc -l)
+    FILE_COUNT=$(cd "$ABS_ROOT" && find . -mindepth 1 -type f | wc -l)
+
+    OUTPUT+="$ABS_ROOT
+$TREE_CONTENT
+
+=== INFO ===
+Directories: $DIR_COUNT
+Files: $FILE_COUNT
+
+"
+fi
+
+FILE_CONTENTS=""
+while IFS= read -r -d '' f; do
+    rel_path="./$(realpath --relative-to="$ABS_ROOT" "$f")"
+    FILE_CONTENTS+="=== FILE: $rel_path ===
+"
+    if [[ -s "$f" ]]; then
+        FILE_CONTENTS+=$(cat "$f")
+    else
+        FILE_CONTENTS+="Empty file"
+    fi
+    FILE_CONTENTS+="
+"
+done < <(find "$ABS_ROOT" -type f \( "${FIND_ARGS[@]}" \) -print0 2>/dev/null | sort -z)
+
+OUTPUT+="$FILE_CONTENTS"
+
+printf "%s" "$OUTPUT" | wl-copy
+
+echo "[LIEM]Successfully copied text to clipboard."

@@ -1,0 +1,5 @@
+@import "/home/axel/.config/lthemes/renaissance/colors.rasi"
+
+imagebox {
+    background-image: url("/home/axel/.config/lthemes/renaissance/wallpapers/TheSchoolOfAthens.png");
+}

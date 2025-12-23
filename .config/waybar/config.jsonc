@@ -1,0 +1,88 @@
+
+{
+    "layer": "top",
+    "margin-top": 15,
+    "width": 1900,
+    "modules-left": ["clock", "network"],
+    "modules-center": ["custom/theme", "hyprland/workspaces", "custom/notification"],
+    "modules-right": ["pulseaudio","battery", "custom/power"],
+    "battery": {
+        "format": " {icon} {capacity}%   ",
+        "format-icons": [" "," "," "," "," "]
+    },
+    "clock": {
+        "format": " 󰥔  {:%H:%M}   ",
+        "format-alt": "   {:%a, %d. %b %H:%M}   "
+    },
+    "pulseaudio": {
+        "format": " {icon}  {volume}%   ",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": "",
+            "default": ["","",""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "network": {
+        "interface": "enp2s0",
+        "format": "{ifname}",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": " 󰈀  {ifname}   ",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "persistent-workspaces": {"*": 5}
+    },
+
+    "custom/notification": {
+        "tooltip": true,
+        "format": "<span size='16pt'> {icon} </span>",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": " 󰪑 ",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+
+    "custom/power": {
+      "format": "   ⏻   ",
+      "return-type": "json",
+      "on-click": "wlogout",
+      "tooltip": false
+    },
+
+    "custom/theme": {
+        "format": " 󰸌 ",
+        "return-type": "json",
+        "on-click": "~/.config/lthemes/lthemes.py select",
+        "tooltip": false
+    }
+
+}
+

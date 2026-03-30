@@ -6,7 +6,9 @@ A minimal and aesthetic Hyprland configuration focused on performance, workflow 
 
 ## 🎥 Demo
 
-[Watch preview](YOUR_VIDEO_LINK_HERE)
+Smooth workflow, animations, and overall setup preview:
+
+[Watch Demo](https://i.imgur.com/ElNTl1I.mp4)
 
 ---
 

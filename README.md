@@ -8,7 +8,7 @@ A minimal and aesthetic Hyprland configuration focused on performance, workflow 
 
 Smooth workflow, animations, and overall setup preview:
 
-[Watch Demo](https://i.imgur.com/ElNTl1I.mp4)
+[Watch Demo]([https://i.imgur.com/ElNTl1I.mp4](https://drive.google.com/file/d/1UMwLYPobl3krsPro_AKdKI5EJXK9DU78/view?usp=sharing))
 
 ---
 
